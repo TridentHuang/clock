@@ -1,15 +1,14 @@
 package cn.fanyu.clock.entity;
 
+import java.time.LocalDate;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
  * <p>
- * <p>
+ * 
  * </p>
  *
  * @author DongJin
@@ -18,26 +17,24 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class User implements Serializable {
+public class Record implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    /**
+     * 活动id
+     */
+    private Integer activityId;
 
     /**
-     * 昵称
+     * 已打卡id
      */
-    private String nickName;
+    private String punchedUserId;
 
     /**
-     * 微信openid
+     * 打卡日期
      */
-    private String openid;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
+    private LocalDate punchedDay;
 
 
 }

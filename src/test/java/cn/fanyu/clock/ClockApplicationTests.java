@@ -1,6 +1,9 @@
 package cn.fanyu.clock;
 
+import cn.fanyu.clock.dto.out.ActivityOutDto;
 import cn.fanyu.clock.entity.User;
+import cn.fanyu.clock.mapper.ActivityMapper;
+import cn.fanyu.clock.service.IActivityService;
 import cn.fanyu.clock.service.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,10 @@ class ClockApplicationTests {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IActivityService activityService;
+    @Autowired
+    private ActivityMapper activityMapper;
 
     @Test
     void contextLoads() {
@@ -21,4 +28,11 @@ class ClockApplicationTests {
         System.out.println(save);
     }
 
+    @Test
+    void getAllByUserId() {
+//        Result users = activityService.getAllByUserId(1);
+//        System.out.println(users.getCode());
+        ActivityOutDto allByUserId = activityMapper.getAllByUserId(2);
+        System.out.println(allByUserId);
+    }
 }
