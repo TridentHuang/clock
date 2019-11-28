@@ -1,8 +1,8 @@
 package cn.fanyu.clock.controller;
 
 
+import cn.fanyu.clock.dto.in.ActivityInDto;
 import cn.fanyu.clock.dto.in.PunchInDto;
-import cn.fanyu.clock.mapper.ActivityMapper;
 import cn.fanyu.clock.model.Result;
 import cn.fanyu.clock.service.IActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,12 @@ public class ActivityController {
 
     @Autowired
     private IActivityService activityService;
-    @Autowired
-    private ActivityMapper activityMapper;
+
+    //发布
+    @PostMapping("/issue")
+    public Result issue(@RequestBody ActivityInDto activityInDto) {
+        return activityService.issue(activityInDto);
+    }
 
     //根据用户id获取所有的创建活动
     @GetMapping("getAll/{userId}")
@@ -46,7 +50,6 @@ public class ActivityController {
     //根据活动id活动所有人员
     @GetMapping("/getMemberByActivityId/{activityId}")
     public Result getMemberByActivityId(@PathVariable("activityId") Integer activityId) {
-        // TODO: 2019/11/28
-        return null;
+        return activityService.getMemberByActivityId(activityId);
     }
 }

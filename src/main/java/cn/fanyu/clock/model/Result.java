@@ -44,6 +44,10 @@ public class Result {
         return new Result(resCodeEnum.getStatus(), resCodeEnum.getMsg(), data);
     }
 
+    public static Result build(Integer code, String msg) {
+        return new Result(code, msg, null);
+    }
+
     public static Result build(ResCodeEnum resCodeEnum) {
         return new Result(resCodeEnum.getStatus(), resCodeEnum.getMsg(), null);
     }

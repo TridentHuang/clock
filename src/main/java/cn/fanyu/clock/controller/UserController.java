@@ -29,10 +29,11 @@ public class UserController {
     @PostMapping("/save")
     public Result save(@RequestBody UserInDto userInDto) {
         System.out.println(userInDto.getCode());
-        User user = new User();
-        user.setNickName(userInDto.getNickName());
-        user.setOpenid(userInDto.getCode());
-        boolean save = userService.save(user);
-        return Result.ok(user);
+//        User user = new User();
+//        user.setNickName(userInDto.getNickName());
+//        user.setOpenid(userInDto.getCode());
+//        boolean save = userService.save(user);
+        // TODO: 2019/11/28
+        return null;
     }
 }

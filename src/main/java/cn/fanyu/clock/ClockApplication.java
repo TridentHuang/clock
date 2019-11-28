@@ -8,8 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("cn.fanyu.clock.mapper")
 public class ClockApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ClockApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(ClockApplication.class, args);
+    }
 }

@@ -1,8 +1,11 @@
 package cn.fanyu.clock.service.impl;
 
+import cn.fanyu.clock.dto.in.ActivityInDto;
 import cn.fanyu.clock.dto.in.PunchInDto;
+import cn.fanyu.clock.dto.out.ActivityOutDto;
 import cn.fanyu.clock.dto.out.UserOutDto;
 import cn.fanyu.clock.entity.Activity;
+import cn.fanyu.clock.interceptor.BusinessException;
 import cn.fanyu.clock.mapper.ActivityMapper;
 import cn.fanyu.clock.model.Result;
 import cn.fanyu.clock.service.IActivityService;
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +32,29 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
     @Autowired
     private ActivityMapper activityMapper;
+
+    @Override
+    public Result issue(ActivityInDto activityInDto) {
+        //只能发布三个活动
+        QueryWrapper<Activity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("belong_user_id", activityInDto.getUserId());
+        Integer count = activityMapper.selectCount(queryWrapper);
+        if (count > 2) {
+            throw new BusinessException(505, "对不起，每个用户只能创建3个活动");
+        }
+        Activity activity = new Activity() {{
+            setBelongUserId(activityInDto.getUserId());
+            setName(activityInDto.getName());
+            setEndTime(activityInDto.getEndTime());
+            setCreateTime(LocalDateTime.now());
+        }};
+        try {
+            activityMapper.insert(activity);
+            return Result.ok(true);
+        } catch (Exception e) {
+            throw new BusinessException(501, "活动已存在");
+        }
+    }
 
     @Override
     public Result isAdd(PunchInDto punchInDto) {
@@ -59,10 +86,12 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
     @Override
     public Result getAllByUserId(Integer userId) {
-        QueryWrapper<Activity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("belong_user_id", userId);
-        List<Activity> list = activityMapper.selectList(queryWrapper);
-        return Result.ok(list);
+//        QueryWrapper<Activity> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("belong_user_id", userId);
+//        List<Activity> list = activityMapper.selectList(queryWrapper);
+//        return Result.ok(list);
+        ArrayList<ActivityOutDto> dto = activityMapper.getAllByUserId(userId);
+        return Result.ok(dto);
     }
 
     @Override

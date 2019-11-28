@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public interface ActivityMapper extends BaseMapper<Activity> {
 
-    ActivityOutDto getAllByUserId(Integer userId);
+    ArrayList<ActivityOutDto> getAllByUserId(Integer userId);
 
     ArrayList<UserOutDto> getMemberByActivityId(Integer activityId);
 }

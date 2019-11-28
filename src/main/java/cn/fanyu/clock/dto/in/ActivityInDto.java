@@ -1,4 +1,4 @@
-package cn.fanyu.clock.dto;
+package cn.fanyu.clock.dto.in;
 
 
 import lombok.Getter;
@@ -17,4 +17,5 @@ import lombok.Setter;
 public class ActivityInDto {
     private String name;
     private String endTime;
+    private Integer userId;
 }
