@@ -38,7 +38,15 @@ public class ActivityController {
     }
 
     //申请加入活动
+    @PostMapping("/apply")
     public Result apply(@RequestBody PunchInDto punchInDto) {
         return activityService.apply(punchInDto);
+    }
+
+    //根据活动id活动所有人员
+    @GetMapping("/getMemberByActivityId/{activityId}")
+    public Result getMemberByActivityId(@PathVariable("activityId") Integer activityId) {
+        // TODO: 2019/11/28
+        return null;
     }
 }

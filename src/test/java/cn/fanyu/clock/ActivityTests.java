@@ -35,4 +35,20 @@ class ActivityTests {
         Result apply = activityService.apply(punchInDto);
         System.out.println(apply.getData());
     }
+
+    @Test
+    void getById() {
+        Result member = activityService.getMemberByActivityId(1);
+        System.out.println(member.getData());
+    }
+
+    @Test
+    void delete(){
+        PunchInDto dto = new PunchInDto() {{
+            setUserId(1);
+            setActivityId(1);
+        }};
+        Result result = activityService.deleteMember(dto);
+        System.out.println(result.getData());
+    }
 }

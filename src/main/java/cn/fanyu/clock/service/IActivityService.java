@@ -23,4 +23,9 @@ public interface IActivityService extends IService<Activity> {
 
     //根据用户id获取所有活动（包含参与人）
     Result getAllByUserId(Integer userId);
+
+    //根据activityId获取所有参与人员
+    Result getMemberByActivityId(Integer activityId);
+
+    Result deleteMember(PunchInDto punchInDto);
 }

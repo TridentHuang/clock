@@ -48,4 +48,31 @@
         WHERE
         temp.num = u.id
     </select>
+    <select id="getMemberByActivityId" resultType="cn.fanyu.clock.dto.out.UserOutDto">
+        SELECT
+        u.id,
+        u.nick_name
+        FROM
+        USER u,
+        (
+        SELECT
+        SUBSTRING_INDEX(
+        SUBSTRING_INDEX(
+        a.member_user_id,
+        ',',
+        help_topic_id + 1
+        ),
+        ',' ,- 1
+        ) num
+        FROM
+        mysql.help_topic,
+        (SELECT * FROM activity WHERE id = #{0}) a
+        WHERE
+        help_topic_id &lt; LENGTH(a.member_user_id) - LENGTH(
+        REPLACE (a.member_user_id, ',', '')
+        ) + 1
+        ) AS temp
+        WHERE
+        u.id = temp.num
+    </select>
 </mapper>
