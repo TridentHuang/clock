@@ -15,6 +15,8 @@ import java.util.List;
  */
 @Data
 public class RecordOutDto {
+    //打卡当日
+    private String punchedDay;
     //已打卡人员
     private List<UserOutDto> punchedUsers;
     //未打卡人员

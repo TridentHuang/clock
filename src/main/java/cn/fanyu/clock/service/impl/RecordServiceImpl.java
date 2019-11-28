@@ -64,12 +64,15 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
         if (recordInDto.getEndTime().contains(SysConstant.TOMMOROW)) {
             punchedDay = DateUtils.getPunchedDay(recordInDto.getEndTime());
         }
+        RecordOutDto recordOutDto;
         //当日打卡记录
         if (recordInDto.getDay().equals(SysConstant.RECORD_TODAY)) {
-            return Result.ok(getRecordBySomeDay(recordInDto.getActivityId(), punchedDay));
+            recordOutDto = getRecordBySomeDay(recordInDto.getActivityId(), punchedDay);
         } else {
-            return Result.ok(getRecordBySomeDay(recordInDto.getActivityId(), DateUtils.getYesterdayStrBySomeDay(punchedDay)));
+            recordOutDto = getRecordBySomeDay(recordInDto.getActivityId(), DateUtils.getYesterdayStrBySomeDay(punchedDay));
         }
+        recordOutDto.setPunchedDay(punchedDay);
+        return Result.ok(recordOutDto);
     }
 
     //根据某日获取打卡人员和非打卡人员记录
