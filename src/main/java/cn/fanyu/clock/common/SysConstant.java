@@ -11,4 +11,6 @@ package cn.fanyu.clock.common;
 public interface SysConstant {
     String TODAY = "当日";
     String TOMMOROW = "次日";
+    String RECORD_TODAY = "today";
+    String RECORD_YESTAERDAY = "yesterday";
 }

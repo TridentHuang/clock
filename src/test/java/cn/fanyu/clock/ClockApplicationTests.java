@@ -3,6 +3,7 @@ package cn.fanyu.clock;
 import cn.fanyu.clock.dto.out.ActivityOutDto;
 import cn.fanyu.clock.entity.User;
 import cn.fanyu.clock.mapper.ActivityMapper;
+import cn.fanyu.clock.mapper.UserMapper;
 import cn.fanyu.clock.service.IActivityService;
 import cn.fanyu.clock.service.IUserService;
 import org.junit.jupiter.api.Test;
@@ -18,12 +19,14 @@ class ClockApplicationTests {
     private IActivityService activityService;
     @Autowired
     private ActivityMapper activityMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     void contextLoads() {
         User user = new User();
-        user.setOpenid("1223");
-        user.setNickName("张三");
+        user.setOpenid("122345");
+        user.setNickName("张k");
         boolean save = userService.save(user);
         System.out.println(save);
     }
@@ -32,7 +35,9 @@ class ClockApplicationTests {
     void getAllByUserId() {
 //        Result users = activityService.getAllByUserId(1);
 //        System.out.println(users.getCode());
-        ActivityOutDto allByUserId = activityMapper.getAllByUserId(2);
-        System.out.println(allByUserId);
+//        ActivityOutDto allByUserId = activityMapper.getAllByUserId(1);
+//        System.out.println(allByUserId);
+        User user = userMapper.selectById("1");
+        System.out.println(user.getCreateTime());
     }
 }
